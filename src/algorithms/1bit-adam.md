@@ -16,7 +16,7 @@ $\textbf{x}_t = \textbf{x}_{t-1} - \gamma \frac{\textbf{m}_t}{\sqrt \textbf{v}_t
 
 where $t$ is the index of iteration, $\textbf{x}$ represents model parameters, $\gamma$ is the learning rate, $\textbf{g}_t$ is gradient at step $t$.
 
-As we discussed above, direct compression ${g}_t$ will lead to the diverge of training because of the non-linear component $\textbf{v}_t$. The intuition of 1-bit Adam is that $\textbf{v}$ tends to be very stable after a few epochs in the beginning, so we can set $\textbf{v}$ as constant afterward and only update $\textbf{m}$. Without the effect of $\textbf{v}$, we can compress $\textbf{m}$ without worrying about the drop of training accuracy.
+As we can see, both $\textbf{m}$ and $\textbf{v}$ are derived from gradients $\textbf{g}$. Compressing $\textbf{g}$ will lead to the diverge of training due to the non-linear dependency of $\textbf{v}$ on $\textbf{g}$. The intuition of 1-bit Adam is that $\textbf{v}$ tends to be very stable after a few epochs in the beginning, so we can set $\textbf{v}$ as constant afterward and only update $\textbf{m}$. Without the effect of $\textbf{v}$, we can compress $\textbf{m}$ without worrying about the drop of training accuracy.
 
 Therefore, 1-bit Adam algorithm consists of two stages: warmup stage and compression stage. 
 
